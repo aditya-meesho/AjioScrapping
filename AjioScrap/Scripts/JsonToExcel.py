@@ -2,6 +2,7 @@ import pandas as pd
 import json
 from collections import defaultdict
 
+
 def ConvertToExcel(filename):
     json_file = f'../outputs/ProductData/RawJson/{filename}.json'
     with open(json_file) as f:
@@ -9,7 +10,7 @@ def ConvertToExcel(filename):
         data = json.load(f)
     df = pd.json_normalize(data)
 
-    original=[]
+    original = []
     lis = set()
     d = defaultdict(list)
 
@@ -24,9 +25,13 @@ def ConvertToExcel(filename):
                     "name": j['name'] if 'name' in j else None,
                     "averageRating": j['averageRating'] if 'averageRating' in j else None,
                     "price.value": j['price.value'] if 'price.value' in j else None,
-                    "url": j['url'] if 'url' in j else None,
+                    "category": {"l1": j['segmentNameText'] if 'segmentNameText' in j else None,
+                                 "l2": j['verticalNameText'] if 'verticalNameText' in j else None,
+                                 "l3": j['brickNameText']} if 'brickNameText' in j else None,
+                    "url": 'https://www.ajio.com'+j['url'] if 'url' in j else None,
                     "brandTypeName": j['brandTypeName'] if 'brandTypeName' in j else None,
-                    "offerPrice.formattedValue": j['offerPrice.formattedValue'] if 'offerPrice.formattedValue' in j else None
+                    "offerPrice.formattedValue": j[
+                        'offerPrice.formattedValue'] if 'offerPrice.formattedValue' in j else None
                 }
                 d[code].append(data)  # Append data to list associated with the code
 
