@@ -35,9 +35,9 @@ def ConvertToExcel(filename):
                 }
                 d[code].append(data)  # Append data to list associated with the code
 
-    print(len(original))
-    print(len(lis))  # Number of unique codes
-    print(len(d))  # Number of unique codes in d (should match len(lis))
+    print("count of total ids : "+str(len(original)))
+    print("count of unique ids : "+str(len(lis)))  # Number of unique codes
+    print("count of ids without duplicates: "+str(len(d)))  # Number of unique codes in d (should match len(lis))
 
     d2 = {}
     for i in d:
@@ -50,4 +50,4 @@ def ConvertToExcel(filename):
 
     df_export.to_excel(excel_file)
 
-    print(f"Data exported to '{excel_file}' successfully.")
+    print(f"Data converted and exported  to '{excel_file}' successfully.")

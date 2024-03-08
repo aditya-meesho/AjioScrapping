@@ -12,7 +12,7 @@ with open(json_file_path, "r") as json_file:
 def save_to_json(data, filename, page, totalPage):
     with open(f"../outputs/ProductData/RawJson/{filename}.json", 'a') as json_file:  # Append mode
         json.dump(data, json_file, indent=4)
-        if page != totalPage-1:
+        if page != totalPage:
             json_file.write(',')
         json_file.write('\n')
         json_file.write('\n')
@@ -24,12 +24,13 @@ for category in data:
         json_file.write('[')
         json_file.write('\n')
 
-    for page in range(1, category[1]):
-        print(page)
+    for page in range(1, category[1]+1):
+        print("current page -> "+str(page))
         api_data = make_api_request(page, url, category[0])
         api_data = api_data.json()
         if api_data:
-            save_to_json(api_data['products'], category[0], page, category[1])
+            data=api_data['products'] if 'products' in api_data else None
+            save_to_json(data, category[0], page, category[1])
             # print(api_data)
         else:
             print("Failed to fetch data from API.")
@@ -42,4 +43,4 @@ for category in data:
 
     ConvertToExcel(category[0])
 
-print("Data extraction completed.")
+print("Data scrapping for Categories completed.")
