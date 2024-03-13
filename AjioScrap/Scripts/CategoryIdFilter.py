@@ -11,23 +11,30 @@ with open(file_path, 'r') as file:
 
 
 
-DirectCuratedId=[]
-IndirectCuratedId=[]
+DirectCuratedId=set()
+IndirectCuratedId=set()
 
 for i in data_list:
     items=i.split('/')
     if items[1]=='s':
-        DirectCuratedId.append(items[2])
+        DirectCuratedId.add(items[2])
     else:
-        IndirectCuratedId.append(items)
+        IndirectCuratedId.add('/'.join(items))
+
+class SetEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, set):
+            return list(obj)
+        return json.JSONEncoder.default(self, obj)
 
 file_path_DirectCuratedId = '../outputs/FilteredCategoryId/directCurateId.json'
 file_path_IndirectCuratedId = '../outputs/FilteredCategoryId/indirectCurateId.json'
 os.makedirs(os.path.dirname(file_path_DirectCuratedId), exist_ok=True)
 os.makedirs(os.path.dirname(file_path_IndirectCuratedId), exist_ok=True)
-
+for i in IndirectCuratedId:
+    print(i)
 with open(file_path_IndirectCuratedId, "w+") as json_file:
-    json.dump(IndirectCuratedId, json_file, indent=4)
+    json.dump(IndirectCuratedId, json_file, indent=4,cls=SetEncoder)
 
 with open(file_path_DirectCuratedId, "w+") as json_file:
-    json.dump(DirectCuratedId, json_file, indent=4)
+    json.dump(DirectCuratedId, json_file, indent=4,cls=SetEncoder)

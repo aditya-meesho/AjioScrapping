@@ -25,6 +25,8 @@ def InitalRequestForEachID(curateIdList):
 
 
 
+
+
 json_file_path = '../outputs/FilteredCategoryId/directCurateId.json'
 with open(json_file_path, "r") as json_file:
     data = json.load(json_file)
