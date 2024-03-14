@@ -1,5 +1,6 @@
 import requests
-def make_api_request(current_page, url, currateid,timeout=10):
+import logging
+def make_api_request(current_page, url, currateid,timeout=5):
     params = {
         # 'fields':'SITE',
         'currentPage': current_page,
@@ -17,6 +18,10 @@ def make_api_request(current_page, url, currateid,timeout=10):
         'is_ads_enable_plp': 'true',
         'displayRatings': 'true'
     }
+    try:
+        response = requests.get(url, params=params,timeout=timeout)
+        return response
+    except Exception as e:
+        logging.error(f"ApiRequest.make_api_request error : {e}",)
 
-    response = requests.get(url, params=params,timeout=timeout)
-    return response
+

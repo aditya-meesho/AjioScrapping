@@ -1,5 +1,5 @@
 import requests
-
+import logging
 
 def make_api_request(current_page, url, currateid,timeout=5):
     params = {
@@ -24,11 +24,11 @@ def make_api_request(current_page, url, currateid,timeout=5):
     # return response
     try:
         response = requests.get(url, params=params, timeout=timeout)
-        response.raise_for_status()  # Raise HTTPError for bad status codes
+        # response.raise_for_status()  # Raise HTTPError for bad status codes
         return response
     except ConnectionError:
-        print("Connection error occurred.")
+        logging.error("Connection error occurred.")
         return None  # or raise an error, depending on your requirement
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
+    # except Exception as e:
+    #     logging.error(f"An error occurred: {e}")
+    #     return None

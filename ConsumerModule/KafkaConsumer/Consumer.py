@@ -4,10 +4,9 @@ from kafka import KafkaConsumer
 from Scripts.ApiRequest import make_api_request
 import csv
 import time
-from threading import Thread, Lock
+import logging
 
 url = 'https://www.ajio.com/api/category/83'
-lock = Lock()  # Create a lock to ensure thread-safe access to the file
 count = 0
 unique_record=set()
 
@@ -69,6 +68,7 @@ for message in my_consumer:
             break
         except requests.Timeout:
             print("Timeout occurred. Retrying...")
+            logging.error(f"Consumer ,timeout occured for message: {message}")
             retry_count += 1
             time.sleep(1)
 
@@ -77,7 +77,9 @@ for message in my_consumer:
         data = api_data.get('products')
         save_to_csv(data, message['categoryId'])
         count=count+1
+    else:
+        logging.error(f"Consumer ,failed to retrieve with status code: {api_data.status_code}")
 
-    print("record added ," + "count = " + str(count))
+    print(f"record added ,count = {count}")
 
 

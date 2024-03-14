@@ -1,6 +1,7 @@
 import os
 import json
-file_path = '../outputs/CategoryId/categoryId.txt'  # Replace 'your_file.txt' with the actual file path
+import logging
+file_path = '../outputs/CategoryId/categoryId.txt'
 data_list = []
 with open(file_path, 'r') as file:
     for line in file:
@@ -8,8 +9,6 @@ with open(file_path, 'r') as file:
         elements = line.split()
         stripped_elements = [element[2:-2] for element in elements]
         data_list.append(stripped_elements[0])
-
-
 
 DirectCuratedId=set()
 IndirectCuratedId=set()
@@ -31,6 +30,7 @@ file_path_DirectCuratedId = '../outputs/FilteredCategoryId/directCurateId.json'
 file_path_IndirectCuratedId = '../outputs/FilteredCategoryId/indirectCurateId.json'
 os.makedirs(os.path.dirname(file_path_DirectCuratedId), exist_ok=True)
 os.makedirs(os.path.dirname(file_path_IndirectCuratedId), exist_ok=True)
+
 for i in IndirectCuratedId:
     print(i)
 with open(file_path_IndirectCuratedId, "w+") as json_file:

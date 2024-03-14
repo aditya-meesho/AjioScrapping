@@ -16,8 +16,6 @@ producer = KafkaProducer(
 def ProduceEvent(data, Topic):
     try:
         producer.send(Topic, value=data)
-        # logger.info(f"Produced message: {data}")
         producer.flush()
     except Exception as e:
-        logger.error(f"Error producing message: {e}")
-    # print("event Produced")
+        logger.error(f"KafkaProducer.ProduceEvent , Error producing message: {e}")
