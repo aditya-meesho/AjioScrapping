@@ -1,5 +1,11 @@
 from kafka import KafkaProducer
 from json import dumps
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 producer = KafkaProducer(
     bootstrap_servers=['localhost:9092'],
@@ -8,5 +14,10 @@ producer = KafkaProducer(
 
 
 def ProduceEvent(data, Topic):
-    producer.send(Topic, value=data)
+    try:
+        producer.send(Topic, value=data)
+        # logger.info(f"Produced message: {data}")
+        producer.flush()
+    except Exception as e:
+        logger.error(f"Error producing message: {e}")
     # print("event Produced")

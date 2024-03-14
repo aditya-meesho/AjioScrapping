@@ -1,7 +1,5 @@
 import requests
-
-
-def make_api_request(current_page, url, currateid):
+def make_api_request(current_page, url, currateid,timeout=10):
     params = {
         # 'fields':'SITE',
         'currentPage': current_page,
@@ -20,5 +18,5 @@ def make_api_request(current_page, url, currateid):
         'displayRatings': 'true'
     }
 
-    response = requests.get(url, params=params)
+    response = requests.get(url, params=params,timeout=timeout)
     return response

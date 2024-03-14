@@ -1,7 +1,7 @@
 import requests
 
 
-def make_api_request(current_page, url, currateid,timeout=.0001):
+def make_api_request(current_page, url, currateid,timeout=5):
     params = {
         # 'fields':'SITE',
         'currentPage': current_page,
@@ -20,5 +20,15 @@ def make_api_request(current_page, url, currateid,timeout=.0001):
         'displayRatings': 'true'
     }
 
-    response = requests.get(url, params=params,timeout=timeout)
-    return response
+    # response = requests.get(url, params=params,timeout=timeout)
+    # return response
+    try:
+        response = requests.get(url, params=params, timeout=timeout)
+        response.raise_for_status()  # Raise HTTPError for bad status codes
+        return response
+    except ConnectionError:
+        print("Connection error occurred.")
+        return None  # or raise an error, depending on your requirement
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
