@@ -19,3 +19,4 @@ def ProduceEvent(data, Topic):
         producer.flush()
     except Exception as e:
         logger.error(f"KafkaProducer.ProduceEvent , Error producing message: {e}")
+

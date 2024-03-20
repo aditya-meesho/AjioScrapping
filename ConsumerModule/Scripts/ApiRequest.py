@@ -20,15 +20,9 @@ def make_api_request(current_page, url, currateid,timeout=5):
         'displayRatings': 'true'
     }
 
-    # response = requests.get(url, params=params,timeout=timeout)
-    # return response
     try:
         response = requests.get(url, params=params, timeout=timeout)
-        # response.raise_for_status()  # Raise HTTPError for bad status codes
         return response
     except ConnectionError:
         logging.error("Connection error occurred.")
-        return None  # or raise an error, depending on your requirement
-    # except Exception as e:
-    #     logging.error(f"An error occurred: {e}")
-    #     return None
+        return None

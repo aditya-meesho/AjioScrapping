@@ -19,9 +19,11 @@ def make_api_request(current_page, url, currateid,timeout=5):
         'displayRatings': 'true'
     }
     try:
-        response = requests.get(url, params=params,timeout=timeout)
+        response = requests.get(url, params=params, timeout=timeout)
         return response
-    except Exception as e:
+    except ConnectionError as e:
         logging.error(f"ApiRequest.make_api_request error : {e}",)
+        return None
+
 
 

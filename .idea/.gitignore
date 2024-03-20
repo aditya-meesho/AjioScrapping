@@ -7,11 +7,5 @@
 /dataSources/
 /dataSources.local.xml
 
-
-/outputs
-/AjioScrap/outputs/CategoryId
-/AjioScrap/outputs/FilteredCategoryId
-/AjioScrap/outputs/FilteredCategoryId/Invalid_Ids
-/AjioScrap/outputs/FilteredCategoryId/Valid_Ids
-/AjioScrap/outputs/ProductData/ExcelData
-/AjioScrap/outputs/ProductData/RawJson
+../AjioScrapy/outputs
+../ConsumerModule/Outputs

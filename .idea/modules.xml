@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AjioScrapping.iml" filepath="$PROJECT_DIR$/AjioScrapping.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AjioScrapy/AjioScrapy.iml" filepath="$PROJECT_DIR$/AjioScrapy/AjioScrapy.iml" />
       <module fileurl="file://$PROJECT_DIR$/ConsumerModule/ConsumerModule.iml" filepath="$PROJECT_DIR$/ConsumerModule/ConsumerModule.iml" />
     </modules>
   </component>
